@@ -12,4 +12,4 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest pytest-cov
-        pytest test_myfile.py --doctest-modules --cov=com --cov-report=xml:/workspaces/HW1/ --cov-report=html
+        pytest test_myfile.py --doctest-modules --cov=myfile.py --cov-report=xml:/workspaces/HW1/ --cov-report=html
