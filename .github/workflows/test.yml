@@ -15,5 +15,9 @@ jobs:
         python-version: '3.12.1'
     - name: Test with pytest
       run: |
-        pip install pytest pytest-cov
+        pip install pytest pytest-cov coveralls
         pytest test_myfile.py --doctest-modules --cov=myfile --cov-report=xml --cov-report=html
+    - name: Upload coverage to Coveralls
+    run: coveralls
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
