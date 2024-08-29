@@ -13,3 +13,4 @@ jobs:
       run: |
         pip install pytest pytest-cov
         pytest test_myfile.py --doctest-modules --cov=myfile --cov-report=xml:/workspaces/HW1/ --cov-report=html
+        
