@@ -7,8 +7,9 @@ import rand
 def mergeSort(arr):
     '''
         Function base case: Input array arr[] of length 1
-        Other Case: Divides array arr[] into 2 parts, and makes recursive calls to mergSort function, 
-        and uses recombine function to merge the outputs of the 2 recursive calls
+        Other Case: Divides array arr[] into 2 parts, 
+        makes recursive calls to mergSort function, 
+        uses recombine function to merge the outputs of the 2 recursive calls
     '''
     if len(arr) == 1:
         return arr
@@ -19,6 +20,9 @@ def mergeSort(arr):
 
 
 def recombine(leftArr, rightArr):
+    '''
+    Function that merges the 2 arrays: leftArr and rightArr in sorted order
+    '''
     leftIndex = 0
     rightIndex = 0
     mergeArr = [None] * (len(leftArr) + len(rightArr))
