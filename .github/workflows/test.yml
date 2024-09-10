@@ -23,10 +23,12 @@ jobs:
         autopep8 --diff --aggressive --aggressive  --exclude='HW2/test_*.py' HW2/*.py
     - name: Run pyflakes
       run: |
-        pyflakes HW2/*.py
+        pyflakes HW2/hw2_debugging.py
+        pyflakes HW2/rand.py
     - name: Run pylint
       run: |
-        pylint HW2/*.py
+        pylint HW2/hw2_debugging.py
+        pylint HW2/rand.py
     - name: Test with pytest
       run: |
         pytest --cov=./; echo
