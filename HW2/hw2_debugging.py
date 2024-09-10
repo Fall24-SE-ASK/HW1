@@ -7,8 +7,8 @@ import rand
 def merge_sort(arr):
     '''
         Function base case: Input array arr[] of length 1
-        Other Case: Divides array arr[] into 2 parts, 
-        makes recursive calls to mergSort function, 
+        Other Case: Divides array arr[] into 2 parts,
+        makes recursive calls to mergSort function,
         uses recombine function to merge the outputs of the 2 recursive calls
     '''
     if len(arr) == 1:
