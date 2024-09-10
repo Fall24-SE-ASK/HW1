@@ -1,8 +1,16 @@
+'''
+A merge sort code that uses recursive calls to mergesort function and a helper recombine function
+'''
 import rand
 
 
 def mergeSort(arr):
-    if (len(arr) == 1):
+    '''
+        Function base case: Input array arr[] of length 1
+        Other Case: Divides array arr[] into 2 parts, and makes recursive calls to mergSort function, 
+        and uses recombine function to merge the outputs of the 2 recursive calls
+    '''
+    if len(arr) == 1:
         return arr
 
     half = len(arr) // 2
