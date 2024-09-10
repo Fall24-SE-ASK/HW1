@@ -20,7 +20,7 @@ jobs:
         pip install pytest pytest-cov coveralls autopep8 pyflakes pylint
     - name: Run static analysis tools
       run: |
-        autopep8 --aggressive --aggressive HW2/*.py
+        autopep8 --diff --aggressive --aggressive HW2/*.py
         pyflakes HW2/*.py
         pylint HW2/*.py
     - name: Test with pytest
