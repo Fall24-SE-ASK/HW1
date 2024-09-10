@@ -43,7 +43,7 @@ def recombine(left_arr, right_arr):
     return merge_arr
 
 
-arr = rand.random_array([None] * 20)
-arr_out = merge_sort(arr)
+arr_in = rand.random_array([None] * 20)
+arr_out = merge_sort(arr_in)
 
 print(arr_out)
