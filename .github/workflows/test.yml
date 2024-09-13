@@ -21,7 +21,7 @@ jobs:
     - name: Run autopep8
       run: |
         autopep8 --diff --aggressive --aggressive HW2/hw2_debugging.py HW2/rand.py | tee autopep8_trace.txt
-        if [ -f autopep8_trace.txt && ! -s autopep8_trace.txt ]; then
+        if [[ -f autopep8_trace.txt && ! -s autopep8_trace.txt ]]; then
             echo "autopep8_status=fail" >> $GITHUB_ENV
         else
             echo "autopep8_status==pass" >> $GITHUB_ENV
@@ -40,7 +40,7 @@ jobs:
     - name: Run pyflakes
       run: |
         pyflakes HW2/hw2_debugging.py HW2/rand.py | tee pyflakes_trace.txt
-        if [ -f pyflakes_trace.txt && ! -s pyflakes_trace.txt ]; then
+        if [[ -f pyflakes_trace.txt && ! -s pyflakes_trace.txt ]]; then
             echo "pyflakes_status==fail" >> $GITHUB_ENV
         else
             echo "pyflakes_status==pass" >> $GITHUB_ENV
