@@ -21,10 +21,10 @@ jobs:
     - name: Run autopep8
       run: |
         autopep8 --diff --aggressive --aggressive HW2/hw2_debugging.py HW2/rand.py | tee autopep8_trace.txt
-        if [[ -f autopep8_trace.txt && ! -s autopep8_trace.txt ]]; then
+        if [ -s autopep8_trace.txt ]; then
             echo "autopep8_status=fail" >> $GITHUB_ENV
         else
-            echo "autopep8_status==pass" >> $GITHUB_ENV
+            echo "autopep8_status=pass" >> $GITHUB_ENV
         fi
     - name: Create autopep8 badge
       uses: schneegans/dynamic-badges-action@v1.7.0
@@ -35,15 +35,15 @@ jobs:
         label: Autopep8
         message: ${{ env.autopep8_status == 'pass' && 'Pass' || 'Fail' }}
         color: ${{ env.autopep8_status == 'pass' && 'brightgreen' || 'red' }}
-        namedLogo: react
+        namedLogo: python
         logoColor: "#ffffff"
     - name: Run pyflakes
       run: |
         pyflakes HW2/hw2_debugging.py HW2/rand.py | tee pyflakes_trace.txt
-        if [[ -f pyflakes_trace.txt && ! -s pyflakes_trace.txt ]]; then
-            echo "pyflakes_status==fail" >> $GITHUB_ENV
+        if [ -s pyflakes_trace.txt ]; then
+            echo "pyflakes_status=fail" >> $GITHUB_ENV
         else
-            echo "pyflakes_status==pass" >> $GITHUB_ENV
+            echo "pyflakes_status=pass" >> $GITHUB_ENV
         fi
     - name: Create pyflakes badge
       uses: schneegans/dynamic-badges-action@v1.7.0
@@ -54,7 +54,7 @@ jobs:
         label: Pyflakes
         message: ${{ env.pyflakes_status == 'pass' && 'Pass' || 'Fail' }}
         color: ${{ env.pyflakes_status == 'pass' && 'brightgreen' || 'red' }}
-        namedLogo: react
+        namedLogo: python
         logoColor: "#ffffff"
     - name: Run pylint
       run: |
