@@ -20,18 +20,63 @@ jobs:
         pip install pytest pytest-cov coveralls autopep8 pyflakes pylint
     - name: Run autopep8
       run: |
-        autopep8 --diff --aggressive --aggressive  --exclude='HW2/test_*.py' HW2/*.py
+        autopep8 --diff --aggressive --aggressive HW2/hw2_debugging.py HW2/rand.py | tee autopep8_trace.txt
+        if [ -s autopep8_trace.txt ]; then
+            echo "autopep8_status=fail" >> $GITHUB_ENV
+        else
+            echo "autopep8_status==pass" >> $GITHUB_ENV
+        fi
+    - name: Create autopep8 badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: e6737b86600dd442f1a5f7d6e435ff45
+        filename: autopep8.json
+        label: Autopep8
+        message: ${{ env.autopep8_status == 'pass' && 'Pass' || 'Fail' }}
+        color: ${{ env.autopep8_status == 'pass' && 'brightgreen' || 'red' }}
+        namedLogo: react
+        logoColor: "#ffffff"
     - name: Run pyflakes
       run: |
-        pyflakes HW2/hw2_debugging.py
-        pyflakes HW2/rand.py
+        pyflakes HW2/hw2_debugging.py HW2/rand.py | tee pyflakes_trace.txt
+        if [ -s pyflakes_trace.txt ]; then
+            echo "pyflakes_status==fail" >> $GITHUB_ENV
+        else
+            echo "pyflakes_status==pass" >> $GITHUB_ENV
+        fi
+    - name: Create pyflakes badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: d78997724f595c9387ad2c9ee87c2481
+        filename: pyflakes.json
+        label: Pyflakes
+        message: ${{ env.pyflakes_status == 'pass' && 'Pass' || 'Fail' }}
+        color: ${{ env.pyflakes_status == 'pass' && 'brightgreen' || 'red' }}
+        namedLogo: react
+        logoColor: "#ffffff"
     - name: Run pylint
       run: |
-        pylint HW2/hw2_debugging.py
-        pylint HW2/rand.py
+        pylint HW2/hw2_debugging.py HW2/rand.py | tee pylint_trace.txt
+        PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint_trace.txt)
+        echo "pylint_score=$PYLINT_SCORE" >> $GITHUB_ENV
+    - name: Create pylint badge
+      uses: schneegans/dynamic-badges-action@v1.7.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: da441bd773d645c5db7217ba68afa9e8
+        filename: pylist.json
+        label: Pylint
+        message: ${{ env.pylint_score }}
+        valColorRange: ${{ env.pylint_score }}
+        maxColorRange: 10
+        minColorRange: 0
+        namedLogo: python
+        logoColor: "#ffffff"
     - name: Test with pytest
       run: |
-        pytest --cov=./; echo
+        pytest --cov=./
     - name: Upload coverage to Coveralls
       uses: coverallsapp/github-action@v2
       env:
